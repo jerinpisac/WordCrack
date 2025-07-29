@@ -1,0 +1,17 @@
+<div class="main-body">
+  <div class="body">
+    <div *ngFor="let row of guesses; let rowIndex = index" class="row">
+      <input *ngFor="let char of row; let colIndex = index"
+          type="text"
+          maxlength="1"
+          [disabled]="rowIndex !== activeRow"
+          [(ngModel)]="guesses[rowIndex][colIndex]"
+          (input)="moveFocus($event, rowIndex, colIndex)"
+          (keydown)="handleBackspace($event, rowIndex, colIndex)"
+          [class]="colors[rowIndex][colIndex]">
+    </div>
+    <button (click)="isRight()" [disabled]="activeRow >= guesses.length">
+      Submit
+    </button>
+  </div>
+</div>
